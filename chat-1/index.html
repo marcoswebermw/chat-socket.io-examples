@@ -1,0 +1,31 @@
+<!Doctype html>
+<html>
+  <head>
+    <title>Socket.IO chat</title>
+  </head>
+  <body>
+    <section>
+      <pre id='chat'></pre>
+      <input type="text" id="msg" />
+      <input type="button" onclick="enviar();" value="Enviar" >
+    </section>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+
+      var socket = io();
+
+      socket.on('msg-servidor', (msg) => {
+          var chat = document.getElementById('chat');
+          chat.innerHTML += msg;
+      });
+
+      var enviar = () => {
+          var msg = document.getElementById('msg');
+          socket.emit('msg-chat', msg.value);
+      };    
+
+  </script>
+
+  </body>
+</html>
